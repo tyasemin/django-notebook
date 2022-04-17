@@ -62,4 +62,67 @@ Running server
 !python manage.py runserver
 ```
 
+Including another url configuration file
 
+[project_name]/urls.py
+
+
+```python
+from django.contrib import admin
+from django.urls import path,include
+from [app_name] import views
+
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',views.index,name='index'),
+    path('[app_name]/',include('[app_name].urls')),
+]
+```
+
+[app_name]/urls.py
+
+
+```python
+from django.urls import path
+from [app_name] import views
+
+urlpatterns=[
+    path('',views.index,name='index'),
+]
+```
+
+Building new paths (settings.py)
+
+
+```python
+BASE_DIR = Path(__file__).resolve().parent.parent
+[FILE_DIR]=Path(BASE_DIR/'[file_name]')
+```
+
+Creating templates(settings.py)
+
+
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [[template_directory],],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+
+```python
+
+```
